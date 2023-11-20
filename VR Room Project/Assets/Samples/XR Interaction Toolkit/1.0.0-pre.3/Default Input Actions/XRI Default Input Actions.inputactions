@@ -187,6 +187,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Left Open",
+                    "type": "Value",
+                    "id": "60fda524-c15d-4af7-ad87-5e3ac42bd80b",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -473,6 +482,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Secondary Pressed Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5ae1fd5f-ed43-4b67-815c-4eb6dabe1f25",
+                    "path": "<XRController>{LeftHand}/primary2DAxis",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "StickDeadzone",
+                    "groups": "Generic XR Controller",
+                    "action": "Left Open",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

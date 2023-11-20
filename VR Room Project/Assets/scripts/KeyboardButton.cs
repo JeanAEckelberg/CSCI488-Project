@@ -37,4 +37,9 @@ public class KeyboardButton : MonoBehaviour
 
     }
 
+    public void SendToKeyboard()
+    {
+        keyboard.InsertChar(buttonText.text);
+    }
+
 }
