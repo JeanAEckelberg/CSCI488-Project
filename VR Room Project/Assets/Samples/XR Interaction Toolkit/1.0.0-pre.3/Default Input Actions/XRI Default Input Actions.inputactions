@@ -469,7 +469,7 @@
                     "path": "<XRController>{LeftHand}/primaryButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Generic XR Controller",
                     "action": "Primary Pressed Left",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -480,7 +480,7 @@
                     "path": "<XRController>{LeftHand}/secondaryButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Generic XR Controller",
                     "action": "Secondary Pressed Left",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -636,6 +636,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Right Open",
+                    "type": "Value",
+                    "id": "88decdfd-789d-4562-a927-f815cd5ed6df",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -911,6 +920,17 @@
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "Teleport Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "69d882b2-a170-4db7-8f14-f0c6662f852c",
+                    "path": "<XRController>{RightHand}/primary2DAxis",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "StickDeadzone",
+                    "groups": "Generic XR Controller",
+                    "action": "Right Open",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

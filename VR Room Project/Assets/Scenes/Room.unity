@@ -2774,7 +2774,7 @@ MonoBehaviour:
   primaryInputActionReference: {fileID: -1488288654655076399, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   secondaryInputActionReference: {fileID: 1196230399091837835, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   open:
-    m_UseReference: 0
+    m_UseReference: 1
     m_Action:
       m_Name: Open
       m_Type: 0
@@ -2784,7 +2784,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 0}
+    m_Reference: {fileID: -5741801074554562009, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   mainCanvas: {fileID: 1994219277}
   mainText: {fileID: 1196017273}
   wheel: {fileID: 1279788561}
