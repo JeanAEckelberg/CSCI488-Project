@@ -13,10 +13,9 @@ public class LeftWheelController : MonoBehaviour
 
     public void OnSelectRow(Vector2 decider)
     {
-        Debugger.Instance.LogIt($"Selecting Row with: {decider}");
+        Debugger.Instance.LogIt($"Selecting Row on left with: {decider}");
         if (decider.y > 0.75 && decider.x <= 0.25)
         {
-            Debugger.Instance.LogIt("Selected Top Row");
             selectedRow = topRow;
         }
         else if (decider.y < -0.75 && Mathf.Abs(decider.x) <= 0.25)
@@ -36,11 +35,6 @@ public class LeftWheelController : MonoBehaviour
     
     public void OnSelect(float diff)
     {
-        Debugger.Instance.LogIt("Here");
-        if (selectedRow is null)
-        {
-            Debugger.Instance.LogIt("True");
-        }
         switch (diff)
         {
             case < -60:

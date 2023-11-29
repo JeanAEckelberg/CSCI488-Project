@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class RightWheelController : MonoBehaviour
 {
@@ -10,37 +9,33 @@ public class RightWheelController : MonoBehaviour
     [SerializeField] private List<KeyboardButton> outerRow;
     [SerializeField] private List<KeyboardButton> innerRow;
     [SerializeField] private List<KeyboardButton> bottomRow;
-    
+
 
     public void OnSelectRow(Vector2 decider)
     {
-        selectedRow?.ForEach(x => x.enabled = false);
-        if (decider.y > 0.95 && decider.x <= 0.05)
+        Debugger.Instance.LogIt($"Selecting Row On right with: {decider}");
+        if (decider.y > 0.75 && decider.x <= 0.25)
         {
             selectedRow = topRow;
         }
-        else if (decider.y < -0.95 && Mathf.Abs(decider.x) <= 0.05)
+        else if (decider.y < -0.75 && Mathf.Abs(decider.x) <= 0.25)
         {
             selectedRow = bottomRow;
         }
-        else if (decider.x > 0.95 && Mathf.Abs(decider.y) <= 0.05)
+        else if (decider.x > 0.75 && Mathf.Abs(decider.y) <= 0.25)
         {
             selectedRow = outerRow;
         }
-        else if (decider.x < -0.95 && Mathf.Abs(decider.y) <= 0.05)
+        else if (decider.x < -0.75 && Mathf.Abs(decider.y) <= 0.25)
         {
             selectedRow = innerRow;
         }
-        else
-        {
-            selectedRow = null;
-        }
-        selectedRow?.ForEach(x => x.enabled = true);
+
+        selectedRow?.ForEach(x => x.gameObject.SetActive(true));
     }
-    
+
     public void OnSelect(float diff)
     {
-        
         switch (diff)
         {
             case > 60:
@@ -49,7 +44,7 @@ public class RightWheelController : MonoBehaviour
             }
             case > 30:
             {
-                selectedRow[0].SendToKeyboard();
+                selectedRow?[0].SendToKeyboard();
                 break;
             }
             case < -150:
@@ -58,24 +53,27 @@ public class RightWheelController : MonoBehaviour
             }
             case < -120:
             {
-                selectedRow[4].SendToKeyboard();
+                selectedRow?[4].SendToKeyboard();
                 break;
             }
             case < -90:
             {
-                selectedRow[3].SendToKeyboard();
+                selectedRow?[3].SendToKeyboard();
                 break;
             }
             case < -60:
             {
-                selectedRow[2].SendToKeyboard();
+                selectedRow?[2].SendToKeyboard();
                 break;
             }
             case < -30:
             {
-                selectedRow[1].SendToKeyboard();
+                selectedRow?[1].SendToKeyboard();
                 break;
             }
         }
+
+        selectedRow?.ForEach(x => x.gameObject.SetActive(false));
+        selectedRow = null;
     }
 }
