@@ -14,6 +14,8 @@ public class customController : MonoBehaviour
 {
     [SerializeField] InputActionReference primaryInputActionReference;
     [SerializeField] InputActionReference secondaryInputActionReference;
+    [SerializeField] InputActionProperty shift;
+    [SerializeField] InputActionProperty space;
     [SerializeField] private InputActionProperty open;
     [SerializeField] private Canvas mainCanvas;
     [SerializeField] private TMP_InputField mainText;
@@ -21,6 +23,7 @@ public class customController : MonoBehaviour
 
     private bool selected = false;
     private bool tracking = false;
+    private bool isShifted = false;
     private Vector2 lastAxis = Vector2.zero;
     private Vector2 axis;
 
@@ -30,6 +33,8 @@ public class customController : MonoBehaviour
         wheel.enabled = false;
         primaryInputActionReference.action.performed += OnBackspace;
         secondaryInputActionReference.action.performed += OnEnter;
+        shift.action.performed += OnShift;
+        space.action.performed += OnSpace;
     }
 
     // Update is called once per frame
@@ -38,7 +43,6 @@ public class customController : MonoBehaviour
         if (!selected)
             return;
         axis = open.action?.ReadValue<Vector2>() ?? Vector2.zero;
-        // Debugger.Instance.LogIt($"Axis: {axis.ToString()}; Last Axis: {lastAxis.ToString()}");
         if (axis == Vector2.zero && lastAxis != Vector2.zero)
         {
             OnClose();
@@ -57,12 +61,6 @@ public class customController : MonoBehaviour
         {
             // OnHover();
             wheel.transform.position = transform.position;
-            var transform1 = wheel.transform;
-            var diff = Vector3.SignedAngle(transform.up, transform1.up, transform1.forward);
-            // Debugger.Instance.LogIt(diff.ToString(CultureInfo.CurrentCulture));
-        }
-        else
-        {
         }
 
         lastAxis = axis;
@@ -84,6 +82,19 @@ public class customController : MonoBehaviour
         mainText.onSubmit.Invoke("");
     }
 
+    public void OnShift(InputAction.CallbackContext c)
+    {
+        if (!selected)
+            return;
+        isShifted = !isShifted;
+    }
+
+    public void OnSpace(InputAction.CallbackContext c)
+    {
+        if (!selected)
+            return;
+        mainText.text += " ";
+    }
 
     public void OnSelect()
     {
@@ -99,16 +110,15 @@ public class customController : MonoBehaviour
         wheel.transform.SetPositionAndRotation(transform1.position, transform1.rotation);
         wheel.enabled = true;
         if (wheel.TryGetComponent<LeftWheelController>(out var left))
-            left.OnSelectRow(axis);
+            left.OnSelectRow(axis, isShifted);
         if (wheel.TryGetComponent<RightWheelController>(out var right))
-            right.OnSelectRow(axis);
+            right.OnSelectRow(axis, isShifted);
     }
 
     private void OnClose()
     {
         var transform1 = wheel.transform;
         var diff = Vector3.SignedAngle(transform.up, transform1.up, transform1.forward);
-        Debugger.Instance.LogIt(diff.ToString(CultureInfo.CurrentCulture));
         if (wheel.TryGetComponent<LeftWheelController>(out var left))
             left.OnSelect(diff);
         if (wheel.TryGetComponent<RightWheelController>(out var right))

@@ -196,6 +196,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Shift",
+                    "type": "Button",
+                    "id": "b15bdbfd-9f92-4ecd-93fe-8fe22a8b4a3a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -495,6 +504,17 @@
                     "action": "Left Open",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "de010fd5-9271-41fc-bb60-89d31475fe3a",
+                    "path": "<XRController>{LeftHand}/primary2DAxisClick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "Shift",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -645,6 +665,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Shift",
+                    "type": "Button",
+                    "id": "17f5af1b-c131-4379-b2c0-b66c0c32641f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -931,6 +960,17 @@
                     "processors": "StickDeadzone",
                     "groups": "Generic XR Controller",
                     "action": "Right Open",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8466d1a8-5caa-493b-9e9a-9dcc27dfe04e",
+                    "path": "<XRController>{RightHand}/primary2DAxisClick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "Shift",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
