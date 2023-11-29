@@ -9,10 +9,11 @@ public class RightWheelController : MonoBehaviour
     [SerializeField] private List<KeyboardButton> outerRow;
     [SerializeField] private List<KeyboardButton> innerRow;
     [SerializeField] private List<KeyboardButton> bottomRow;
-    
+
 
     public void OnSelectRow(Vector2 decider)
     {
+        Debugger.Instance.LogIt($"Selecting Row On right with: {decider}");
         if (decider.y > 0.75 && decider.x <= 0.25)
         {
             selectedRow = topRow;
@@ -29,12 +30,12 @@ public class RightWheelController : MonoBehaviour
         {
             selectedRow = innerRow;
         }
+
         selectedRow?.ForEach(x => x.gameObject.SetActive(true));
     }
-    
+
     public void OnSelect(float diff)
     {
-        
         switch (diff)
         {
             case > 60:
@@ -70,8 +71,9 @@ public class RightWheelController : MonoBehaviour
                 selectedRow?[1].SendToKeyboard();
                 break;
             }
-            selectedRow?.ForEach(x => x.gameObject.SetActive(false));
-            selectedRow = null;
         }
+
+        selectedRow?.ForEach(x => x.gameObject.SetActive(false));
+        selectedRow = null;
     }
 }
