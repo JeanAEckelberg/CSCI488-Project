@@ -2582,6 +2582,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   primaryInputActionReference: {fileID: 4993375920437403294, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   secondaryInputActionReference: {fileID: 8671925206648157212, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  shift:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Shift
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: e55e8aba-995b-40fd-a7b7-c9598cbd67ef
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -4373459253818063952, guid: b72ab2a46d9094be38774d023beb4d34, type: 3}
+  space:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Space
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 6c9cebb4-04d8-4349-9100-a88873b4f94e
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   open:
     m_UseReference: 1
     m_Action:
@@ -5044,6 +5068,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   primaryInputActionReference: {fileID: -1488288654655076399, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   secondaryInputActionReference: {fileID: 1196230399091837835, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  shift:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Shift
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 6ede0a38-2203-43cb-b3d7-4f6a8edc0608
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  space:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Space
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: fda0b223-32de-4211-84fc-ac0475676d2e
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   open:
     m_UseReference: 1
     m_Action:
