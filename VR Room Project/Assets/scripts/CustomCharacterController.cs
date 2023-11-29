@@ -25,4 +25,9 @@ public class CustomCharacterController : MonoBehaviour
     {
         moveProvider.enabled = !moveProvider.enabled;
     }
+    
+    public void OnDeselect()
+    {
+        moveProvider.enabled = true;
+    }
 }

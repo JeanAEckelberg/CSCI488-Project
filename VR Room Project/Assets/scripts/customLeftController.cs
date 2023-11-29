@@ -10,10 +10,10 @@ using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.OpenXR.Input;
 using XRController = UnityEngine.InputSystem.XR.XRController;
 
-public class customController : MonoBehaviour
+public class customLeftController : MonoBehaviour
 {
     [SerializeField] InputActionReference primaryInputActionReference;
-    [SerializeField] InputActionReference secondaryInputActionReference;
+    [SerializeField] InputActionReference specialInputActionReference;
     [SerializeField] InputActionProperty shift;
     [SerializeField] InputActionProperty space;
     [SerializeField] private InputActionProperty open;
@@ -31,8 +31,8 @@ public class customController : MonoBehaviour
     void Start()
     {
         wheel.enabled = false;
-        primaryInputActionReference.action.performed += OnBackspace;
-        secondaryInputActionReference.action.performed += OnEnter;
+        primaryInputActionReference.action.performed += OnTab;
+        specialInputActionReference.action.performed += OnSpecial;
         shift.action.performed += OnShift;
         space.action.performed += OnSpace;
     }
@@ -59,27 +59,35 @@ public class customController : MonoBehaviour
         }
         else if (axis != Vector2.zero && lastAxis != Vector2.zero)
         {
-            // OnHover();
+            var transform1 = wheel.transform;
+            var diff = Vector3.SignedAngle(transform.up, transform1.up, transform1.forward);
+            if (wheel.TryGetComponent<LeftWheelController>(out var left))
+                left.OnHover(diff);
+            if (wheel.TryGetComponent<RightWheelController>(out var right))
+                right.OnHover(diff);
             wheel.transform.position = transform.position;
         }
 
         lastAxis = axis;
     }
 
-    private void OnBackspace(InputAction.CallbackContext c)
+    private void OnTab(InputAction.CallbackContext c)
     {
         if (!selected)
             return;
 
-        mainCanvas.GetComponent<Keyboard>().DeleteChar();
+        mainText.text += "\t";
     }
 
-    private void OnEnter(InputAction.CallbackContext c)
+    private void OnSpecial(InputAction.CallbackContext c)
     {
         if (!selected)
             return;
 
-        mainText.onSubmit.Invoke("");
+        if (wheel.TryGetComponent<LeftWheelController>(out var left))
+            left.OnSelectRow(axis, isShifted, true);
+        if (wheel.TryGetComponent<RightWheelController>(out var right))
+            right.OnSelectRow(axis, isShifted, true);
     }
 
     public void OnShift(InputAction.CallbackContext c)
@@ -98,9 +106,16 @@ public class customController : MonoBehaviour
 
     public void OnSelect()
     {
-        Debugger.Instance.LogIt("Here");
+        Debugger.Instance.LogIt($"Left Selected: {selected}");
         selected = !selected;
     }
+    
+    public void OnDeselect()
+    {
+        Debugger.Instance.LogIt($"Left deselected: {selected}");
+        selected = false;
+    }
+
 
     public void OnOpen()
     {
