@@ -508,7 +508,7 @@
                 {
                     "name": "",
                     "id": "de010fd5-9271-41fc-bb60-89d31475fe3a",
-                    "path": "<XRController>{LeftHand}/primary2DAxisClick",
+                    "path": "<XRController>{LeftHand}/thumbstickClicked",
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
@@ -966,7 +966,7 @@
                 {
                     "name": "",
                     "id": "8466d1a8-5caa-493b-9e9a-9dcc27dfe04e",
-                    "path": "<XRController>{RightHand}/primary2DAxisClick",
+                    "path": "<XRController>{RightHand}/thumbstickClicked",
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",

@@ -28,11 +28,11 @@ public class RightWheelController : MonoBehaviour
         }
         else if (decider.x > 0.75 && Mathf.Abs(decider.y) <= 0.25)
         {
-            selectedRow = onShift ? shiftedInnerRow : innerRow;
+            selectedRow = onShift ? shiftedOuterRow : outerRow;
         }
         else if (decider.x < -0.75 && Mathf.Abs(decider.y) <= 0.25)
         {
-            selectedRow = onShift ? shiftedOuterRow : outerRow;
+            selectedRow = onShift ? shiftedInnerRow : innerRow;
         }
 
         selectedRow?.ForEach(x => x.gameObject.SetActive(true));
