@@ -2,8 +2,7 @@
 
 ## Special Keys
 
-* R3, L3            => Shift
-* R3 + R3, L3 + L3  => Capslock
+* R3, L3            => CapsLock
 * RGrip, LGrip      => Space
 
 ### Left Controller
@@ -22,18 +21,18 @@
 
 ### Left Controller
 
-* L ^   => WHEEL(1,2,3,4,5)
-* L <=  => WHEEL(q,w,e,r,t)
-* L =>  => WHEEL(a,s,d,f,g)
-* L \/  => WHEEL(z,x,c,v,b)
+* L ^  => WHEEL(q,w,e,r,t)
+* L >  => WHEEL(a,s,d,f,g)
+* L v  => WHEEL(z,x,c,v,b)
+* L <   => WHEEL(1,2,3,4,5)
 * X     => WHEEL(`,[,\)
 
 ### Right Controller
 
-* R ^   => WHEEL(6,7,8,9,0)
-* R <=  => WHEEL(h,j,k,l,;)
-* R =>  => WHEEL(y,u,i,o,p)
-* R \/  => WHEEL(n,m,<,>,?)
+* R ^  => WHEEL(y,u,i,o,p)
+* R <  => WHEEL(h,j,k,l,;)
+* R v  => WHEEL(n,m,<,>,?)
+* R >   => WHEEL(6,7,8,9,0)
 * X     => WHEEL(-,=,')
 
 ---
