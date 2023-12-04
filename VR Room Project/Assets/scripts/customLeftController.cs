@@ -52,7 +52,8 @@ public class customLeftController : MonoBehaviour
         {
             tracking = true;
         }
-        else if (tracking && ((Mathf.Abs(axis.x) > 0.75 && Mathf.Abs(axis.y) < 0.25) || (Mathf.Abs(axis.y) > 0.75 && Mathf.Abs(axis.x) < 0.25)))
+        else if (tracking && ((Mathf.Abs(axis.x) > 0.75 && Mathf.Abs(axis.y) < 0.25) ||
+                              (Mathf.Abs(axis.y) > 0.75 && Mathf.Abs(axis.x) < 0.25)))
         {
             tracking = false;
             OnOpen();
@@ -83,11 +84,17 @@ public class customLeftController : MonoBehaviour
     {
         if (!selected)
             return;
+        if (!c.ReadValueAsButton())
+        {
+            OnClose();
+            return;
+        }
 
         if (wheel.TryGetComponent<LeftWheelController>(out var left))
             left.OnSelectRow(axis, isShifted, true);
         if (wheel.TryGetComponent<RightWheelController>(out var right))
             right.OnSelectRow(axis, isShifted, true);
+        OnOpen();
     }
 
     public void OnShift(InputAction.CallbackContext c)
@@ -109,7 +116,7 @@ public class customLeftController : MonoBehaviour
         Debugger.Instance.LogIt($"Left Selected: {selected}");
         selected = !selected;
     }
-    
+
     public void OnDeselect()
     {
         Debugger.Instance.LogIt($"Left deselected: {selected}");

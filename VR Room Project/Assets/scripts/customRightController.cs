@@ -77,11 +77,17 @@ public class customRightController : MonoBehaviour
     {
         if (!selected)
             return;
+        if (!c.ReadValueAsButton())
+        {
+            OnClose();
+            return;
+        }
 
         if (wheel.TryGetComponent<LeftWheelController>(out var left))
             left.OnSelectRow(axis, isShifted, true);
         if (wheel.TryGetComponent<RightWheelController>(out var right))
             right.OnSelectRow(axis, isShifted, true);
+        OnOpen();
     }
 
     private void OnBackspace(InputAction.CallbackContext c)
