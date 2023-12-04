@@ -24,6 +24,7 @@ public class customLeftController : MonoBehaviour
     private bool selected = false;
     private bool tracking = false;
     private bool isShifted = false;
+    private bool isTrackingSpecial = false;
     private Vector2 lastAxis = Vector2.zero;
     private Vector2 axis;
 
@@ -58,7 +59,7 @@ public class customLeftController : MonoBehaviour
             tracking = false;
             OnOpen();
         }
-        else if (axis != Vector2.zero && lastAxis != Vector2.zero)
+        else if ((axis != Vector2.zero && lastAxis != Vector2.zero) || isTrackingSpecial)
         {
             var transform1 = wheel.transform;
             var diff = Vector3.SignedAngle(transform.up, transform1.up, transform1.forward);
@@ -87,6 +88,7 @@ public class customLeftController : MonoBehaviour
         if (!c.ReadValueAsButton())
         {
             OnClose();
+            isTrackingSpecial = false;
             return;
         }
 
@@ -95,6 +97,7 @@ public class customLeftController : MonoBehaviour
         if (wheel.TryGetComponent<RightWheelController>(out var right))
             right.OnSelectRow(axis, isShifted, true);
         OnOpen();
+        isTrackingSpecial = true;
     }
 
     public void OnShift(InputAction.CallbackContext c)
