@@ -30,6 +30,7 @@ public class customRightController : MonoBehaviour
     private Vector2 axis;
 
     // Start is called before the first frame update
+    // Binds actions to additional functions
     void Start()
     {
         wheel.enabled = false;
@@ -41,6 +42,7 @@ public class customRightController : MonoBehaviour
     }
 
     // Update is called once per frame
+    // Handles selecting keydial and hovering
     void Update()
     {
         if (!selected)
@@ -70,10 +72,16 @@ public class customRightController : MonoBehaviour
                 right.OnHover(diff);
             wheel.transform.position = transform.position;
         }
+        else
+        {
+            var transform1 = transform;
+            wheel.transform.SetPositionAndRotation(transform1.position, transform1.rotation);
+        }
 
         lastAxis = axis;
     }
     
+    // Handle special key when pressed and released
     private void OnSpecial(InputAction.CallbackContext c)
     {
         if (!selected)
@@ -93,6 +101,7 @@ public class customRightController : MonoBehaviour
         isTrackingSpecial = true;
     }
 
+    // Handle backspace being pressed
     private void OnBackspace(InputAction.CallbackContext c)
     {
         if (!selected)
@@ -101,6 +110,7 @@ public class customRightController : MonoBehaviour
         mainCanvas.GetComponent<Keyboard>().DeleteChar();
     }
 
+    // Handle sending newline character to the document
     private void OnEnter(InputAction.CallbackContext c)
     {
         if (!selected)
@@ -108,7 +118,8 @@ public class customRightController : MonoBehaviour
 
         mainText.text += "\n";
     }
-
+    
+    // Update shift boolean when shift is toggled
     public void OnShift(InputAction.CallbackContext c)
     {
         if (!selected)
@@ -116,6 +127,7 @@ public class customRightController : MonoBehaviour
         isShifted = !isShifted;
     }
 
+    // Handle pressing space
     public void OnSpace(InputAction.CallbackContext c)
     {
         if (!selected)
@@ -123,31 +135,28 @@ public class customRightController : MonoBehaviour
         mainText.text += " ";
     }
 
+    // enable keydial functions
     public void OnSelect()
     {
         Debugger.Instance.LogIt($"Right selected: {selected}");
         selected = !selected;
+        wheel.enabled = selected;
     }
     
-    public void OnDeselect()
-    {
-        Debugger.Instance.LogIt($"Right deselected: {selected}");
-        selected = false;
-    }
-
+    // Handle setting the position of the keydial
     public void OnOpen()
     {
         if (!selected)
             return;
         var transform1 = transform;
         wheel.transform.SetPositionAndRotation(transform1.position, transform1.rotation);
-        wheel.enabled = true;
         if (wheel.TryGetComponent<LeftWheelController>(out var left))
             left.OnSelectRow(axis, isShifted);
         if (wheel.TryGetComponent<RightWheelController>(out var right))
             right.OnSelectRow(axis, isShifted);
     }
 
+    // Handle sending selection and closing keydial
     private void OnClose()
     {
         var transform1 = wheel.transform;
@@ -156,6 +165,5 @@ public class customRightController : MonoBehaviour
             left.OnSelect(diff);
         if (wheel.TryGetComponent<RightWheelController>(out var right))
             right.OnSelect(diff);
-        wheel.enabled = false;
     }
 }

@@ -8,10 +8,10 @@ public class Debugger : MonoBehaviour
 {
     public static Debugger Instance;
 
-    // Start is called before the first frame update
     private TMP_Text txt;
-    private int counter = 0;
+    [SerializeField] private bool silent;
 
+    // Start is called before the first frame update
     void Start()
     {
         txt = GetComponentInChildren<TMP_Text>();
@@ -19,15 +19,15 @@ public class Debugger : MonoBehaviour
     }
 
     // Update is called once per frame
+    // Write logs to screen if not silent (to a max of 10)
     public void LogIt(string msg)
     {
-        counter++;
-        txt.text += msg + "\n";
-        if (counter <= 10)
+        if (silent)
             return;
+        txt.text += msg + "\n";
         txt.text = txt.text.Split("\n")
             .Reverse()
-            .Take(9)
+            .Take(10)
             .Reverse()
             .Aggregate("", (s, s1) => s + "\n" + s1);
     }

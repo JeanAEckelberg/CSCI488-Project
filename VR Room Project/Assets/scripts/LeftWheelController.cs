@@ -19,6 +19,7 @@ public class LeftWheelController : MonoBehaviour
     [SerializeField] private List<KeyboardButton> shiftedBottomRow;
 
 
+    // Select active buttons and disable inactive buttons
     public void OnSelectRow(Vector2 decider, bool onShift, bool isSpecial = false)
     {
         Debugger.Instance.LogIt($"Selecting Row on left with: {decider}; Shifted: {onShift}");
@@ -47,44 +48,30 @@ public class LeftWheelController : MonoBehaviour
         selectedRow?.ForEach(x => x.gameObject.SetActive(true));
     }
     
+    // Select specific key
     public void OnSelect(float diff)
     {
         switch (diff)
         {
-            case < -60:
-            {
+            case < -60 or > 150:
                 break;
-            }
             case < -30:
-            {
                 selectedRow?[0].SendToKeyboard();
                 break;
-            }
-            case > 150:
-            {
-                break;
-            }
             case > 120:
-            {
                 selectedRow?[4].SendToKeyboard();
                 break;
-            }
             case > 90:
-            {
                 selectedRow?[3].SendToKeyboard();
                 break;
-            }
             case > 60:
-            {
                 selectedRow?[2].SendToKeyboard();
                 break;
-            }
             case > 30:
-            {
                 selectedRow?[1].SendToKeyboard();
                 break;
-            }
         }
+
         selectedRow?.ForEach(x =>
         {
             x.Unhover();
@@ -94,44 +81,33 @@ public class LeftWheelController : MonoBehaviour
         defaultDisplay?.ForEach(x => x.gameObject.SetActive(true));
     }
     
+    // Send hover command to the right key
     public void OnHover(float diff)
     {
         selectedRow?.ForEach(x => x.Unhover());
         switch (diff)
         {
-            case < -60:
-            {
+            case < -60 or > 150:
+                selectedRow?[6].Hover();
                 break;
-            }
             case < -30:
-            {
                 selectedRow?[0].Hover();
                 break;
-            }
-            case > 150:
-            {
-                break;
-            }
             case > 120:
-            {
                 selectedRow?[4].Hover();
                 break;
-            }
             case > 90:
-            {
                 selectedRow?[3].Hover();
                 break;
-            }
             case > 60:
-            {
                 selectedRow?[2].Hover();
                 break;
-            }
             case > 30:
-            {
                 selectedRow?[1].Hover();
                 break;
-            }
+            default:
+                selectedRow?[5].Hover();
+                break;
         }
     }
 }

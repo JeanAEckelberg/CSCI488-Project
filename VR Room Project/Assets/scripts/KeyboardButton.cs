@@ -20,10 +20,10 @@ public class KeyboardButton : MonoBehaviour
     [SerializeField] TextMeshProUGUI buttonText;
     private Image image;
 
-
+    // Gets correct components on start
     void Start()
     {
-        image = this.gameObject.GetComponent<Image>();
+        image = gameObject.GetComponent<Image>();
         keyboard = canvas.GetComponent<Keyboard>();
 
         if (buttonText.text.Length == 1){
@@ -34,11 +34,15 @@ public class KeyboardButton : MonoBehaviour
 
     }
 
+    // set hover sprite
     public void Hover() => image.sprite = hoverImage;
 
+    // set normal sprite
     public void Unhover() => image.sprite = defaultImage;
 
+    // use name on botton text
     public void NameToButtonText() => buttonText.text = gameObject.name;
 
+    // sends character to keyboard
     public void SendToKeyboard() => keyboard.InsertChar(buttonText.text);
 }

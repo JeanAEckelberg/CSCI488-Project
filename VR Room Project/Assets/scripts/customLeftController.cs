@@ -29,6 +29,7 @@ public class customLeftController : MonoBehaviour
     private Vector2 axis;
 
     // Start is called before the first frame update
+    // Binds actions to additional functions
     void Start()
     {
         wheel.enabled = false;
@@ -39,6 +40,7 @@ public class customLeftController : MonoBehaviour
     }
 
     // Update is called once per frame
+    // Handles selecting keydial and hovering
     void Update()
     {
         if (!selected)
@@ -69,10 +71,16 @@ public class customLeftController : MonoBehaviour
                 right.OnHover(diff);
             wheel.transform.position = transform.position;
         }
+        else
+        {
+            var transform1 = transform;
+            wheel.transform.SetPositionAndRotation(transform1.position, transform1.rotation);
+        }
 
         lastAxis = axis;
     }
-
+    
+    // Handle Tab Action
     private void OnTab(InputAction.CallbackContext c)
     {
         if (!selected)
@@ -81,6 +89,7 @@ public class customLeftController : MonoBehaviour
         mainText.text += "\t";
     }
 
+    // Handle special key when pressed and released
     private void OnSpecial(InputAction.CallbackContext c)
     {
         if (!selected)
@@ -100,6 +109,7 @@ public class customLeftController : MonoBehaviour
         isTrackingSpecial = true;
     }
 
+    // Handle shift togglw
     public void OnShift(InputAction.CallbackContext c)
     {
         if (!selected)
@@ -107,6 +117,7 @@ public class customLeftController : MonoBehaviour
         isShifted = !isShifted;
     }
 
+    // Handle space entry
     public void OnSpace(InputAction.CallbackContext c)
     {
         if (!selected)
@@ -114,32 +125,33 @@ public class customLeftController : MonoBehaviour
         mainText.text += " ";
     }
 
+    // enable keydial functions
     public void OnSelect()
     {
         Debugger.Instance.LogIt($"Left Selected: {selected}");
         selected = !selected;
+        wheel.enabled = selected;
+        var temp = mainText.colors;
+        temp.normalColor = selected ? Color.white : Color.grey;
+        temp.highlightedColor = selected ? Color.white : Color.grey;
+        temp.selectedColor = selected ? Color.white : Color.grey;
+        mainText.colors = temp;
     }
 
-    public void OnDeselect()
-    {
-        Debugger.Instance.LogIt($"Left deselected: {selected}");
-        selected = false;
-    }
-
-
+    // Handle setting the position of the keydial
     public void OnOpen()
     {
         if (!selected)
             return;
         var transform1 = transform;
         wheel.transform.SetPositionAndRotation(transform1.position, transform1.rotation);
-        wheel.enabled = true;
         if (wheel.TryGetComponent<LeftWheelController>(out var left))
             left.OnSelectRow(axis, isShifted);
         if (wheel.TryGetComponent<RightWheelController>(out var right))
             right.OnSelectRow(axis, isShifted);
     }
 
+    // Handle sending selection and closing keydial
     private void OnClose()
     {
         var transform1 = wheel.transform;
@@ -148,6 +160,5 @@ public class customLeftController : MonoBehaviour
             left.OnSelect(diff);
         if (wheel.TryGetComponent<RightWheelController>(out var right))
             right.OnSelect(diff);
-        wheel.enabled = false;
     }
 }
