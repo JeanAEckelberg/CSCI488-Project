@@ -8,6 +8,7 @@ public class LeftWheelController : MonoBehaviour
     private List<KeyboardButton> selectedRow;
     [SerializeField] private List<Image> defaultDisplay;
     [SerializeField] private List<KeyboardButton> specialRow;
+    [SerializeField] private List<KeyboardButton> shiftedSpecialRow;
     [SerializeField] private List<KeyboardButton> topRow;
     [SerializeField] private List<KeyboardButton> shiftedTopRow;
     [SerializeField] private List<KeyboardButton> outerRow;
@@ -24,7 +25,7 @@ public class LeftWheelController : MonoBehaviour
         defaultDisplay?.ForEach(x => x.gameObject.SetActive(false));
         if (isSpecial)
         {
-            selectedRow = specialRow;
+            selectedRow = onShift ? shiftedSpecialRow : specialRow;
         }
         if (decider.y > 0.75 && decider.x <= 0.25)
         {
