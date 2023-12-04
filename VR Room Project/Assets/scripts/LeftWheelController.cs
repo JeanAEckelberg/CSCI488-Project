@@ -28,19 +28,19 @@ public class LeftWheelController : MonoBehaviour
         {
             selectedRow = onShift ? shiftedSpecialRow : specialRow;
         }
-        if (decider.y > 0.75 && decider.x <= 0.25)
+        if (decider.y > 0.5 && decider.x <= 0.5)
         {
             selectedRow = onShift ? shiftedTopRow : topRow;
         }
-        else if (decider.y < -0.75 && Mathf.Abs(decider.x) <= 0.25)
+        else if (decider.y < -0.5 && Mathf.Abs(decider.x) <= 0.5)
         {
             selectedRow = onShift ? shiftedBottomRow : bottomRow;
         }
-        else if (decider.x > 0.75 && Mathf.Abs(decider.y) <= 0.25)
+        else if (decider.x > 0.5 && Mathf.Abs(decider.y) <= 0.5)
         {
             selectedRow = onShift ? shiftedInnerRow : innerRow;
         }
-        else if (decider.x < -0.75 && Mathf.Abs(decider.y) <= 0.25)
+        else if (decider.x < -0.5 && Mathf.Abs(decider.y) <= 0.5)
         {
             selectedRow = onShift ? shiftedOuterRow : outerRow;
         }

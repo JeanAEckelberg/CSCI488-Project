@@ -25,7 +25,6 @@ public class customLeftController : MonoBehaviour
     private bool tracking = false;
     private bool isShifted = false;
     private bool isTrackingSpecial = false;
-    private Vector2 lastAxis = Vector2.zero;
     private Vector2 axis;
 
     // Start is called before the first frame update
@@ -46,23 +45,15 @@ public class customLeftController : MonoBehaviour
         if (!selected)
             return;
         axis = open.action?.ReadValue<Vector2>() ?? Vector2.zero;
-        if (axis == Vector2.zero && lastAxis != Vector2.zero)
+        if ((Mathf.Abs(axis.x) > 0.5 && Mathf.Abs(axis.y) < 0.5) || (Mathf.Abs(axis.y) > 0.5 && Mathf.Abs(axis.x) < 0.5) || isTrackingSpecial)
         {
-            OnClose();
-            tracking = false;
-        }
-        else if (axis != Vector2.zero && lastAxis == Vector2.zero)
-        {
-            tracking = true;
-        }
-        else if (tracking && ((Mathf.Abs(axis.x) > 0.75 && Mathf.Abs(axis.y) < 0.25) ||
-                              (Mathf.Abs(axis.y) > 0.75 && Mathf.Abs(axis.x) < 0.25)))
-        {
-            tracking = false;
-            OnOpen();
-        }
-        else if ((axis != Vector2.zero && lastAxis != Vector2.zero) || isTrackingSpecial)
-        {
+            if (!tracking)
+            {
+                OnOpen();
+                tracking = true;
+                return;
+            }
+
             var transform1 = wheel.transform;
             var diff = Vector3.SignedAngle(transform.up, transform1.up, transform1.forward);
             if (wheel.TryGetComponent<LeftWheelController>(out var left))
@@ -70,14 +61,15 @@ public class customLeftController : MonoBehaviour
             if (wheel.TryGetComponent<RightWheelController>(out var right))
                 right.OnHover(diff);
             wheel.transform.position = transform.position;
+            return;
         }
-        else
+        if (tracking)
         {
-            var transform1 = transform;
-            wheel.transform.SetPositionAndRotation(transform1.position, transform1.rotation);
+            tracking = false;
+            OnClose();
         }
-
-        lastAxis = axis;
+        var transform2 = transform;
+        wheel.transform.SetPositionAndRotation(transform2.position, transform2.rotation);
     }
     
     // Handle Tab Action
