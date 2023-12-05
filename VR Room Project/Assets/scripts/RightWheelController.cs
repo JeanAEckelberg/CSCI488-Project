@@ -28,19 +28,19 @@ public class RightWheelController : MonoBehaviour
         {
             selectedRow = onShift ? shiftedSpecialRow : specialRow;
         }
-        if (decider.y > 0.5 && decider.x <= 0.5)
+        if (decider.y > 0.7 && decider.x <= 0.7)
         {
             selectedRow = onShift ? shiftedTopRow : topRow;
         }
-        else if (decider.y < -0.5 && Mathf.Abs(decider.x) <= 0.5)
+        else if (decider.y < -0.7 && Mathf.Abs(decider.x) <= 0.7)
         {
             selectedRow = onShift ? shiftedBottomRow : bottomRow;
         }
-        else if (decider.x > 0.5 && Mathf.Abs(decider.y) <= 0.5)
+        else if (decider.x > 0.7 && Mathf.Abs(decider.y) <= 0.7)
         {
             selectedRow = onShift ? shiftedOuterRow : outerRow;
         }
-        else if (decider.x < -0.5 && Mathf.Abs(decider.y) <= 0.5)
+        else if (decider.x < -0.7 && Mathf.Abs(decider.y) <= 0.7)
         {
             selectedRow = onShift ? shiftedInnerRow : innerRow;
         }

@@ -47,7 +47,7 @@ public class customRightController : MonoBehaviour
         if (!selected)
             return;
         axis = open.action?.ReadValue<Vector2>() ?? Vector2.zero;
-        if ((Mathf.Abs(axis.x) > 0.5 && Mathf.Abs(axis.y) < 0.5) || (Mathf.Abs(axis.y) > 0.5 && Mathf.Abs(axis.x) < 0.5) || isTrackingSpecial)
+        if ((Mathf.Abs(axis.x) > 0.7 && Mathf.Abs(axis.y) < 0.7) || (Mathf.Abs(axis.y) > 0.7 && Mathf.Abs(axis.x) < 0.7) || isTrackingSpecial)
         {
             if (!tracking)
             {
